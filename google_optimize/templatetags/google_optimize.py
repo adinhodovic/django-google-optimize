@@ -1,6 +1,11 @@
 import logging
 
+from django import template
+
 logger = logging.LoggerAdapter(logging.getLogger(), extra={"app": "google_experiments"})
+
+
+register = template.Library()
 
 
 def _get_variant_value(request, experiment_id, variant_values):
@@ -50,6 +55,7 @@ def _parse_experiments(request):
         variation_id = experiment_parts[2]
         experiment_variations[experiment_id] = variation_id
     return experiment_variations
+
 
 @register.simple_tag(takes_context=True)
 def google_experiment(context, **kwargs):
