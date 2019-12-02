@@ -1,0 +1,13 @@
+attrs==19.3.0
+importlib-metadata==1.1.0
+more-itertools==8.0.0
+packaging==19.2
+pluggy==0.13.1
+py==1.8.0
+pyparsing==2.4.5
+pytest==5.3.1
+pytest-clarity==0.2.0a1
+six==1.13.0
+termcolor==1.1.0
+wcwidth==0.1.7
+zipp==0.6.0
