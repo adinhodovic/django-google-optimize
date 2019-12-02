@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 
-from .google_experiments import _parse_experiments
+from google_optimize.utils import _parse_experiments
 
 
 def test_parses_single_experiment():
