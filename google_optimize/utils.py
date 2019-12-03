@@ -3,9 +3,10 @@ import logging
 logger = logging.getLogger()
 
 
-def _get_variant_value(request, experiment_id, variant_values):
+def get_experiments_variants(request, experiments):
     try:
         experiment_variants = _parse_experiments(request)
+        print(experiment_variants)
     except Exception:  # pylint: disable=broad-except
         logger.error(
             "Failed to parse _gaexp", extra=dict(_gaexp=request.COOKIES.get("_gaexp"))
@@ -16,22 +17,42 @@ def _get_variant_value(request, experiment_id, variant_values):
         logger.warning("Missing _ga_exp cookie")
         return None
 
-    if experiment_id not in experiment_variants:
-        logger.warning(
-            "experiment_id not found in experiments cookie",
-            extra=dict(experiment_id=experiment_id, _gaexp=request.COOKIES["_gaexp"]),
-        )
-        return None
+    active_experiments = {}
 
-    variant = experiment_variants[experiment_id]
-    if variant not in variant_values:
-        logger.warning(
-            "variant not found in source code experiment variants",
-            extra=dict(variant=variant, variant_values=variant_values),
-        )
-        return None
+    for experiment in experiments:
 
-    return variant_values[variant]
+        experiment_id = experiment.get("id", None)
+        experiment_alias = experiment.get("alias", None)
+        variant_aliases = experiment.get("variant_aliases", None)
+
+        if not experiment_id:
+            logger.warning("experiment id not found in experiment settings")
+            return None
+
+        if experiment_id not in experiment_variants:
+            logger.warning(
+                "experiment id %s not found in experiments cookie %s",
+                experiment_id,
+                request.COOKIES["_gaexp"],
+            )
+            return None
+
+        variant = experiment_variants[experiment_id]
+
+        if variant_aliases:
+            if int(variant) >= len(variant_aliases):
+                logger.warning(
+                    "variant %s does not have an alias in %s", variant, variant_aliases
+                )
+                return None
+            variant = variant_aliases[int(variant)]
+
+        if experiment_alias:
+            active_experiments[experiment_alias] = variant
+        else:
+            active_experiments[experiment_id] = variant
+
+    return active_experiments
 
 
 def _parse_experiments(request):
