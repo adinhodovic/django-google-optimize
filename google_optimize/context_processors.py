@@ -1,9 +1,9 @@
 from django.conf import settings
 
-from .utils import _get_variant_value
+from .utils import get_experiments_variants
 
 
 def google_experiment(request):
     experiments = settings.GOOGLE_OPTIMIZE_EXPERIMENTS
-    experiments_variants = _get_variant_value(request, experiments)
+    experiments_variants = get_experiments_variants(request, experiments)
     return {"google_optimize": experiments_variants}

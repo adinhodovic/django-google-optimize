@@ -1,3 +1,8 @@
+INSTALLED_APPS = [
+    "google_optimize",
+    "tests",
+]
+
 SECRET_KEY = "very-secret"
 
 

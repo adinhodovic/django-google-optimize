@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 
-from google_optimize.utils import _get_variant_value, _parse_experiments
+from google_optimize.utils import _parse_experiments, get_experiments_variants
 
 
 def test_parses_single_experiment_cookie():
@@ -29,7 +29,7 @@ def test_parses_single_experiment():
             "variant_aliases": ["old_design", "new_design"],
         }
     ]
-    values = _get_variant_value(request, experiments)
+    values = get_experiments_variants(request, experiments)
     assert values == {"redesign": "new_design"}
 
 
@@ -50,7 +50,7 @@ def test_parses_multiple_experiments():
             "variant_aliases": ["old_header", "new_header"],
         },
     ]
-    values = _get_variant_value(request, experiments)
+    values = get_experiments_variants(request, experiments)
 
     assert values == {"redesign_page": "new_design", "resign_header": "old_header"}
 
@@ -59,7 +59,7 @@ def test_parses_experiments_without_variant_aliases():
     request = HttpRequest()
     request.COOKIES["_gaexp"] = "GAX1.2.utSuKi3PRbmxeG08en8VNw.18147.1"
     experiments = [{"id": "utSuKi3PRbmxeG08en8VNw", "alias": "redesign"}]
-    values = _get_variant_value(request, experiments)
+    values = get_experiments_variants(request, experiments)
     assert values == {"redesign": "1"}
 
 
@@ -67,5 +67,5 @@ def test_parses_experiments_without_experiment_alias():
     request = HttpRequest()
     request.COOKIES["_gaexp"] = "GAX1.2.utSuKi3PRbmxeG08en8VNw.18147.1"
     experiments = [{"id": "utSuKi3PRbmxeG08en8VNw"}]
-    values = _get_variant_value(request, experiments)
+    values = get_experiments_variants(request, experiments)
     assert values == {"utSuKi3PRbmxeG08en8VNw": "1"}
