@@ -1,5 +1,5 @@
 Welcome to django-google-optimize's documentation!
-=========================================
+===================================================
 
 ``django-google-optimize`` is a reusable Django application designed to make running server side Google Optimize A/B test easy.
 
@@ -7,8 +7,6 @@ Welcome to django-google-optimize's documentation!
    :maxdepth: 2
 
    getting_started
-   experiments_in_views
-   changelog
 
 Indices and tables
 ==================
