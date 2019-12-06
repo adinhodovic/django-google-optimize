@@ -1,7 +1,9 @@
 # Django-google-optimize
 
-[![pipeline status](https://gitlab.com/hodovicadin/django-google-optimize/badges/master/pipeline.svg)](https://gitlab.com/hodovicadin/django-google-optimize/commits/master)
-[![coverage report](https://gitlab.com/hodovicadin/django-google-optimize/badges/master/coverage.svg)](https://gitlab.com/hodovicadin/django-google-optimize/commits/master)
+[![Build status](https://gitlab.com/hodovicadin/django-google-optimize/badges/master/pipeline.svg)](https://gitlab.com/hodovicadin/django-google-optimize/commits/master)
+[![Coverage](https://gitlab.com/hodovicadin/django-google-optimize/badges/master/coverage.svg)](https://gitlab.com/hodovicadin/django-google-optimize/commits/master)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/django-google-optimize.svg)](https://pypi.org/project/django-google-optimize/)
+[![PyPI Version](https://img.shields.io/pypi/v/django-google-optimize.svg?style=flat)](https://pypi.org/project/django-google-optimize/)
 
 Django-google-optimize is a reusable Django application designed to make running server side Google Optimize A/B test easy.
 
