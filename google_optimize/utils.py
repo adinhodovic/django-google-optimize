@@ -7,7 +7,6 @@ def get_experiments_variants(request, experiments):
     try:
         experiment_variants = _parse_experiments(request)
     except Exception:  # pylint: disable=broad-except
-        print("here")
         logger.error("Failed to parse _gaexp %s", request.COOKIES.get("_gaexp"))
         return None
 
@@ -37,17 +36,9 @@ def get_experiments_variants(request, experiments):
 
         variant = experiment_variants[experiment_id]
 
-        print(variant_aliases)
-        print("hey1")
         if variant_aliases:
-            print("here2")
-            print(variant_aliases)
-            if int(variant) >= len(variant_aliases):
-                logger.warning(
-                    "variant %s does not have an alias in %s", variant, variant_aliases
-                )
-                return None
-            variant = variant_aliases[int(variant)]
+            if variant in variant_aliases:
+                variant = variant_aliases[variant]
 
         if experiment_alias:
             active_experiments[experiment_alias] = variant
@@ -70,6 +61,6 @@ def _parse_experiments(request):
     for experiment_str in experiments:
         experiment_parts = experiment_str.split(".")
         experiment_id = experiment_parts[0]
-        variation_id = experiment_parts[2]
+        variation_id = int(experiment_parts[2])
         experiment_variations[experiment_id] = variation_id
     return experiment_variations
