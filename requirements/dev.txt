@@ -1,0 +1,9 @@
+tox
+coverage
+Django>=2.1
+twine
+wheel
+pytest
+pytest-cov
+pytest-django
+pytest-clarity
