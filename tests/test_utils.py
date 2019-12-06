@@ -1,3 +1,5 @@
+from unittest import mock
+
 from django.http import HttpRequest
 
 from google_optimize.utils import _parse_experiments, get_experiments_variants
@@ -17,6 +19,62 @@ def test_parses_multiple_experiment_cookies():
     ] = "GAX1.2.3x8_BbSCREyqtWm1H1OUrQ.18166.1!7IXTpXmLRzKwfU-Eilh_0Q.18166.0"
     experiments = _parse_experiments(request)
     assert experiments == {"7IXTpXmLRzKwfU-Eilh_0Q": "0", "3x8_BbSCREyqtWm1H1OUrQ": "1"}
+
+
+def test_parses_without_cookie():
+    request = HttpRequest()
+    experiments = _parse_experiments(request)
+    assert experiments is None
+
+
+@mock.patch("logging.Logger.warning")
+def test_logs_missing_gaexp_cookie(logger):
+    request = HttpRequest()
+    get_experiments_variants(request, {})
+    logger.assert_called_with("Missing _ga_exp cookie")
+
+
+@mock.patch("logging.Logger.error")
+def test_logs_failed_cookie_parsing(logger):
+    request = HttpRequest()
+    request.COOKIES["_gaexp"] = "test"
+    get_experiments_variants(request, [])
+    logger.assert_called_with("Failed to parse _gaexp %s", "test")
+
+
+@mock.patch("logging.Logger.warning")
+def test_logs_settings_missing_experiment_id(logger):
+    request = HttpRequest()
+    request.COOKIES["_gaexp"] = "GAX1.2.3x8_BbSCREyqtWm1H1OUrQ.18166.1"
+    get_experiments_variants(request, [{"test": "test"}])
+    logger.assert_called_with("experiment id not found in experiment settings")
+
+
+@mock.patch("logging.Logger.warning")
+def test_logs_experiment_id_not_in_cookies(logger):
+    request = HttpRequest()
+    gaexp = "GAX1.2.3x8_BbSCREyqtWm1H1OUrQ.18166.1"
+    experiment_id = "test"
+    request.COOKIES["_gaexp"] = gaexp
+    get_experiments_variants(request, [{"id": experiment_id}])
+    logger.assert_called_with(
+        "experiment id %s not found in experiments cookie %s", experiment_id, gaexp
+    )
+
+
+@mock.patch("logging.Logger.warning")
+def test_logs_variant_missing_alias(logger):
+    request = HttpRequest()
+    variant = "1"
+    experiment_id = "3x8_BbSCREyqtWm1H1OUrQ"
+    request.COOKIES["_gaexp"] = "GAX1.2." + experiment_id + ".18166." + variant
+    aliases = ["abc"]
+    get_experiments_variants(
+        request, [{"id": experiment_id, "variant_aliases": aliases}]
+    )
+    logger.assert_called_with(
+        "variant %s does not have an alias in %s", variant, aliases
+    )
 
 
 def test_parses_single_experiment():

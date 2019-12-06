@@ -6,11 +6,9 @@ logger = logging.getLogger()
 def get_experiments_variants(request, experiments):
     try:
         experiment_variants = _parse_experiments(request)
-        print(experiment_variants)
     except Exception:  # pylint: disable=broad-except
-        logger.error(
-            "Failed to parse _gaexp", extra=dict(_gaexp=request.COOKIES.get("_gaexp"))
-        )
+        print("here")
+        logger.error("Failed to parse _gaexp %s", request.COOKIES.get("_gaexp"))
         return None
 
     if not experiment_variants:
@@ -39,7 +37,11 @@ def get_experiments_variants(request, experiments):
 
         variant = experiment_variants[experiment_id]
 
+        print(variant_aliases)
+        print("hey1")
         if variant_aliases:
+            print("here2")
+            print(variant_aliases)
             if int(variant) >= len(variant_aliases):
                 logger.warning(
                     "variant %s does not have an alias in %s", variant, variant_aliases
