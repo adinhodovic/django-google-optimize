@@ -1,8 +1,8 @@
 ---
 before_script:
-- curl -O https://bootstrap.pypa.io/get-pip.py
-- python get-pip.py
-- pip install -r requirements/test.txt
+  - curl -o /get-pip.py -O https://bootstrap.pypa.io/get-pip.py
+  - python /get-pip.py
+  - pip install -r requirements/test.txt
 
 image: docker:stable
 
