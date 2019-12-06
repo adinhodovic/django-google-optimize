@@ -1,0 +1,6 @@
+[run]
+branch = True
+source = google_optimize
+
+[report]
+fail_under = 95
