@@ -37,22 +37,26 @@ Add settings for the experiments:
 
 - id: Experiment ID required to identify variants for the experiment in templates
 - alias: Alias for the experiment ID, optional useful for clarity in templates when accessing experiment variants by key
-- variant_aliases: Aliases for each variant, each index represents a Google Experiment variant
+- variant_aliases: Aliases for each variant, each index represents a Optmize Experiment variant
 
 ```py
 # google-optimize
 GOOGLE_OPTIMIZE_EXPERIMENTS = [
-    {"id": "abc", "alias": "subscribe_box", "variant_aliases": ["old_sub_box", "new_sub_box"]}
+    {
+        "id": "utSuKi3PRbmxeG08en8VNw",
+        "alias": "redesign",
+        "variant_aliases": {0: "old_design", 1: "new_design"},
+    }
 ]
 ```
 
 Now you can access the experiment in templates:
 
 ```django
-{% if google_optimize.subscribe_box == "new_subscribe" %}
-{% include "xyz/new_sub_box.html" %}
+{% if google_optimize.redesign == "new_design" %}
+{% include "jobs/jobposting_list_new.html" %}
 {% else %}
-{% include "xyz/old_sub_box.html" %}
+{% include "jobs/jobposting_list_old.html" %}
 {% endif %}
 ```
 
@@ -60,7 +64,7 @@ Or use it inline:
 
 ```django
 <nav class="navbar navbar-expand-lg navbar-dark
-{% if google_optimize.redesign == "new_design" %}navbar-redesign {% endif %}">
+{% if google_optimize.redesign == "new_design" %} navbar-redesign{% endif %}">
 ```
 
 Full documentation [can be found here.](https://django-google-optimize.readthedocs.io/en/latest/)
