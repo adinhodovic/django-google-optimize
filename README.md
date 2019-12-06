@@ -1,6 +1,6 @@
 # Django-google-optimize
 
-[![pipeline status](https://gitlab.com/adinhodovic/django-google-optimize/badges/master/pipeline.svg)](https://gitlab.com/adinhodovic/django-google-optimize/commits/master)
+[![pipeline status](https://gitlab.com/hodovicadin/django-google-optimize/badges/master/pipeline.svg)](https://gitlab.com/hodovicadin/django-google-optimize/commits/master)
 
 Django-google-optimize is a reusable Django application designed to make running server side Google Optimize A/B test easy.
 
