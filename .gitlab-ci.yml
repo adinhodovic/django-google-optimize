@@ -11,6 +11,7 @@ services:
 
 stages:
   - test
+  - deploy
 
 test:python36-django:
   image: python:3.6
@@ -36,3 +37,11 @@ docs:
   image: python:3.8
   stage: test
   script: tox -e docs
+
+release:
+  image: python:3.8
+  only:
+    refs:
+      - master
+  stage: deploy
+  script: tox -e release
