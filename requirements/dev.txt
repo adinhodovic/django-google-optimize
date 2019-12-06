@@ -1,3 +1,4 @@
+tox
 coverage
 Django>=2.1
 twine
