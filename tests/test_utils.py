@@ -30,15 +30,23 @@ def test_parses_without_cookie():
 @mock.patch("logging.Logger.warning")
 def test_logs_missing_gaexp_cookie(logger):
     request = HttpRequest()
-    get_experiments_variants(request, {})
+    get_experiments_variants(request, [{"id": "abc"}])
     logger.assert_called_with("Missing _ga_exp cookie")
+
+
+@mock.patch("logging.Logger.error")
+def test_logs_no_settings(logger):
+    request = HttpRequest()
+    request.COOKIES["_gaexp"] = "test"
+    get_experiments_variants(request, None)
+    logger.assert_called_with("Setting GOOGLE_OPTIMIZE_EXPERIMENTS not defined")
 
 
 @mock.patch("logging.Logger.error")
 def test_logs_failed_cookie_parsing(logger):
     request = HttpRequest()
     request.COOKIES["_gaexp"] = "test"
-    get_experiments_variants(request, [])
+    get_experiments_variants(request, [{"id": "abc"}])
     logger.assert_called_with("Failed to parse _gaexp %s", "test")
 
 

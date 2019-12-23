@@ -4,6 +4,10 @@ logger = logging.getLogger()
 
 
 def get_experiments_variants(request, experiments):
+    if not experiments:
+        logger.error("Setting GOOGLE_OPTIMIZE_EXPERIMENTS not defined")
+        return None
+
     try:
         experiment_variants = _parse_experiments(request)
     except Exception:  # pylint: disable=broad-except
