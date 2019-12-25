@@ -1,5 +1,7 @@
 from os import path
 
+DEBUG = True
+
 SECRET_KEY = "very-secret"
 
 INSTALLED_APPS = [
