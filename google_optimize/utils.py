@@ -15,7 +15,7 @@ def get_experiments_variants(request, experiments):
         return None
 
     if not experiment_variants:
-        logger.warning("Missing _ga_exp cookie")
+        logger.debug("Missing _ga_exp cookie")
         return None
 
     active_experiments = {}
