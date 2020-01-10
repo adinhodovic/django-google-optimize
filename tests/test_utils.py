@@ -27,7 +27,7 @@ def test_parses_without_cookie():
     assert experiments is None
 
 
-@mock.patch("logging.Logger.warning")
+@mock.patch("logging.Logger.debug")
 def test_logs_missing_gaexp_cookie(logger):
     request = HttpRequest()
     get_experiments_variants(request, [{"id": "abc"}])
