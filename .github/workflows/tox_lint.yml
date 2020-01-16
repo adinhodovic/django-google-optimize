@@ -1,12 +1,12 @@
 ---
 name: Python package
 on: [push]  # yamllint disable-line rule:truthy
-env:
-  PYTHON_VERSION: 3.8
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PYTHON_VERSION: 3.8
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python ${{ PYTHON_VERSION }}
