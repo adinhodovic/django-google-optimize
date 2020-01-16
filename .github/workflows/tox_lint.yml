@@ -1,11 +1,11 @@
 ---
 name: Lint
 on: [push]  # yamllint disable-line rule:truthy
-env:
-  PYTHON_VERSION: 3.8
 
 jobs:
   lint:
+    env:
+      PYTHON_VERSION: 3.8
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
