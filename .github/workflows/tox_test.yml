@@ -8,7 +8,7 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [36, 37, 38]
 
     steps:
       - uses: actions/checkout@v1
@@ -21,6 +21,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox tox-gh-actions
       - name: Test with tox
-        run: tox -e "py${${{ matrix.python-version }}//.}-django22",\
-             "py${${{ matrix.python-version }}//.}-django30",\
-             "py${${{ matrix.python-version }}//.}-djangomaster"
+        run: tox -e py${{ matrix.python-version }}-django22,\
+             py${{ matrix.python-version }}-django30,\
+             py${{ matrix.python-version }}-djangomaster
