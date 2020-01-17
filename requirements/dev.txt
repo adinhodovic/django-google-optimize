@@ -3,6 +3,8 @@ coverage
 Django>=2.1
 twine
 wheel
+pylint
+pylint-django
 pytest
 pytest-cov
 pytest-django
