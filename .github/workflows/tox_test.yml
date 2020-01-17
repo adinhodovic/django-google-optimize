@@ -20,11 +20,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install tox tox-gh-actions
-      - name: Set tox py version
-        run: |
-          ref="${{matrix.python-version////-}}"
-          echo $ref
-          echo "::set-env name=ref::$ref"
       - name: Test with tox
         run: tox -e "py${${{ matrix.python-version }}//.}-django22",\
              py${{ matrix.python-version }}-django30,\
