@@ -24,4 +24,4 @@ jobs:
       - name: Test with tox
         run: PY_VERSION=${{ matrix.python-version }} &&\
              tox -e \
-             py${${PY_VERSION}//.}-${{ matrix.dj-version }}
+             py${PY_VERSION//.}-${{ matrix.dj-version }}
