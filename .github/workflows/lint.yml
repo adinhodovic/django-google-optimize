@@ -1,14 +1,12 @@
 ---
-name: Test
+name: Lint
 on:  # yamllint disable-line rule:truthy
   push:
     branches:
-      - master
-    tags:
-      - .*
+      - '**'
 
 jobs:
-  docs:
+  black:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -20,9 +18,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install tox
-      - name: Test with tox
-        run: tox -e docs
-  release:
+      - name: Black with tox
+        run: tox -e black
+  isort:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -34,5 +32,5 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install tox
-      - name: Test with tox
-        run: tox -e release
+      - name: Isort with tox
+        run: tox -e isort

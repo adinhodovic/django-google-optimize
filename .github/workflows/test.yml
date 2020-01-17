@@ -1,6 +1,9 @@
 ---
 name: Test
-on: [push]  # yamllint disable-line rule:truthy
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - '**'
 
 jobs:
   test:
