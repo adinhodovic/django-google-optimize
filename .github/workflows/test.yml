@@ -27,8 +27,8 @@ jobs:
         run: |
           PY_VERSION=${{ matrix.python-version }} &&
           tox -e
-          py${PY_VERSION//.}-django22
-          py${PY_VERSION//.}-django30
+          py${PY_VERSION//.}-django22,
+          py${PY_VERSION//.}-django30,
           py${PY_VERSION//.}-djangomaster
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
