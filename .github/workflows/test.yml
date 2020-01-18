@@ -26,8 +26,7 @@ jobs:
       - name: Test with tox
         run: |
           PY_VERSION=${{ matrix.python-version }} &&
-          tox -e
-          py${PY_VERSION//.}-django22,
+          tox -e py${PY_VERSION//.}-django22,
           py${PY_VERSION//.}-django30,
           py${PY_VERSION//.}-djangomaster
       - name: Upload coverage to Codecov
