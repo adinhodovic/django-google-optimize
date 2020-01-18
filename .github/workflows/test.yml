@@ -12,7 +12,6 @@ jobs:
       max-parallel: 3
       matrix:
         python-version: [3.6, 3.7, 3.8]
-        dj-version: [django22, django30, djangomaster]
 
     steps:
       - uses: actions/checkout@v1
@@ -27,7 +26,10 @@ jobs:
       - name: Test with tox
         run: |
           PY_VERSION=${{ matrix.python-version }} &&
-          tox -e py${PY_VERSION//.}-${{ matrix.dj-version }}
+          tox -e
+          py${PY_VERSION//.}-django22
+          py${PY_VERSION//.}-django30
+          py${PY_VERSION//.}-djangomaster
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
