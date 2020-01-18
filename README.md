@@ -2,7 +2,7 @@
 
 ![Lint](https://github.com/adinhodovic/django-google-optimize/workflows/Test/badge.svg)
 ![Test](https://github.com/adinhodovic/django-google-optimize/workflows/Lint/badge.svg)
-[![Coverage](https://gitlab.com/hodovicadin/django-google-optimize/badges/master/coverage.svg)](https://gitlab.com/hodovicadin/django-google-optimize/commits/master)
+[![Coverage](https://codecov.io/gh/adinhodovic/django-google-optimize/branch/master/graphs/badge.svg)](https://codecov.io/gh/adinhodovic/django-google-optimize/branch/master)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/django-google-optimize.svg)](https://pypi.org/project/django-google-optimize/)
 [![PyPI Version](https://img.shields.io/pypi/v/django-google-optimize.svg?style=flat)](https://pypi.org/project/django-google-optimize/)
 
