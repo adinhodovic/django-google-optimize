@@ -26,9 +26,7 @@ jobs:
       - name: Test with tox
         run: |
           PY_VERSION=${{ matrix.python-version }} &&
-          tox -e py${PY_VERSION//.}-django22,
-          py${PY_VERSION//.}-django30,
-          py${PY_VERSION//.}-djangomaster
+          tox -e py${PY_VERSION//.}-django22,py${PY_VERSION//.}-django30,py${PY_VERSION//.}-djangomaster # yamllint disable-line rule:line-length
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
