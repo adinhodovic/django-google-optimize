@@ -2,7 +2,7 @@
 name = "django-google-optimize"
 authors = ["Adin Hodovic <hodovicadin@gmail.com>"]
 license = "MIT"
-version = "0.1.44"
+version = "0.1.7"
 readme = "README.md"
 homepage = "https://github.com/adinhodovic/django-google-optimize"
 repository = "https://github.com/adinhodovic/django-google-optimize"
@@ -12,7 +12,8 @@ keywords = [
   "A/B Testing",
   "Google Optimize",
   "Django",
-  "Server Side"
+  "Server Side",
+  "KPI"
 ]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
