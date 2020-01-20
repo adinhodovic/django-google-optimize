@@ -2,7 +2,7 @@ from unittest import mock
 
 from django.http import HttpRequest
 
-from google_optimize.utils import _parse_experiments, get_experiments_variants
+from django_google_optimize.utils import _parse_experiments, get_experiments_variants
 
 
 def test_parses_single_experiment_cookie():
