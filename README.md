@@ -19,7 +19,7 @@ Add the application to installed django applications:
 ```py
 DJANGO_APPS = [
     ...
-    "google_optimize",
+    "django_google_optimize",
     ...
 ]
 ```
@@ -29,7 +29,7 @@ Add the context processor:
 ```py
 "context_processors": [
     ...
-    "google_optimize.context_processors.google_experiment",
+    "django_google_optimize.context_processors.google_experiment",
     ...
 ]
 ```
@@ -43,7 +43,7 @@ Add settings for the experiments:
 - variant_aliases: Aliases for each variant, each index represents a Optmize Experiment variant
 
 ```py
-# google-optimize
+# django-google-optimize
 GOOGLE_OPTIMIZE_EXPERIMENTS = [
     {
         "id": "utSuKi3PRbmxeG08en8VNw",

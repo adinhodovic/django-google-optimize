@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 
-from google_optimize.context_processors import google_experiment
+from django_google_optimize.context_processors import google_experiment
 
 
 def test_experiment_processor():

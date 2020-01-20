@@ -5,7 +5,7 @@ DEBUG = True
 SECRET_KEY = "very-secret"
 
 INSTALLED_APPS = [
-    "google_optimize",
+    "django_google_optimize",
 ]
 
 TEMPLATES = [
@@ -15,7 +15,7 @@ TEMPLATES = [
         "DIRS": [path.join(path.dirname(__file__), "templates"),],
         "OPTIONS": {
             "context_processors": [
-                "google_optimize.context_processors.google_experiment",
+                "django_google_optimize.context_processors.google_experiment",
             ]
         },
     }
