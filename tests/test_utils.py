@@ -120,3 +120,17 @@ def test_parses_experiments_without_experiment_alias():
     experiments = [{"id": "utSuKi3PRbmxeG08en8VNw"}]
     values = get_experiments_variants(request, experiments)
     assert values == {"utSuKi3PRbmxeG08en8VNw": 1}
+
+
+def test_parses_experiments_without_variant_alias():
+    request = HttpRequest()
+    request.COOKIES["_gaexp"] = "GAX1.2.utSuKi3PRbmxeG08en8VNw.18147.1"
+    experiments = [
+        {
+            "id": "utSuKi3PRbmxeG08en8VNw",
+            "alias": "redesign",
+            "variant_aliases": {0: "old_header"},
+        }
+    ]
+    values = get_experiments_variants(request, experiments)
+    assert values == {"redesign": 1}
