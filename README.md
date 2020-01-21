@@ -24,12 +24,12 @@ DJANGO_APPS = [
 ]
 ```
 
-Add the context processor:
+Add the middleware:
 
 ```py
-"context_processors": [
+MIDDLEWARE = [
     ...
-    "django_google_optimize.context_processors.google_experiment",
+    "django_google_optimize.middleware.google_optimize",
     ...
 ]
 ```
@@ -56,7 +56,7 @@ GOOGLE_OPTIMIZE_EXPERIMENTS = [
 Now you can access the experiment in templates:
 
 ```django
-{% if google_optimize.redesign == "new_design" %}
+{% if request.google_optimize.redesign == "new_design" %}
 {% include "jobs/jobposting_list_new.html" %}
 {% else %}
 {% include "jobs/jobposting_list_old.html" %}
@@ -67,7 +67,7 @@ Or use it inline:
 
 ```django
 <nav class="navbar navbar-expand-lg navbar-dark
-{% if google_optimize.redesign == "new_design" %} navbar-redesign{% endif %}">
+{% if request.google_optimize.redesign == "new_design" %} navbar-redesign{% endif %}">
 ```
 
 Full documentation [can be found here.](https://django-google-optimize.readthedocs.io/en/latest/)

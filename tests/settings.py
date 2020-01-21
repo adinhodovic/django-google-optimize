@@ -8,15 +8,17 @@ INSTALLED_APPS = [
     "django_google_optimize",
 ]
 
+MIDDLEWARE = [
+    "django_google_optimize.middleware.google_optimize",
+]
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "APP_DIRS": True,
         "DIRS": [path.join(path.dirname(__file__), "templates"),],
         "OPTIONS": {
-            "context_processors": [
-                "django_google_optimize.context_processors.google_experiment",
-            ]
+            "context_processors": ["django.template.context_processors.request",]
         },
     }
 ]
