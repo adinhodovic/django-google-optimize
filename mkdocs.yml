@@ -1,0 +1,16 @@
+---
+site_name: django-google-optimize
+nav:
+    - Home: index.md
+    - Installation: installation.md
+    - Configuration: configuration.md
+    - Usage: usage.md
+theme: readthedocs
+repo_url: https://github.com/adinhodovic/django-google-optimize/
+site_url: https://github.com/adinhodovic/django-google-optimize/
+copyright: Adin Hodovic and individual contributors
+site_author: Adin Hodovic
+
+extra:
+    version: 0.1
+    release: 0.1.7
