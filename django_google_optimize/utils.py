@@ -1,20 +1,24 @@
 import logging
 
+from .models import GoogleExperiment
+
 logger = logging.getLogger()
 
 
-def get_experiments_variants(request, experiments):
+# pylint: disable=too-many-return-statements
+def get_experiments_variants(request):
+    experiments = GoogleExperiment.objects.all()
     if not experiments:
-        logger.error("Setting GOOGLE_OPTIMIZE_EXPERIMENTS not defined")
+        logger.warning("No experiment added")
         return None
 
     try:
-        experiment_variants = _parse_experiments(request)
+        cookie_data = _parse_experiments(request)
     except Exception:  # pylint: disable=broad-except
-        logger.error("Failed to parse _gaexp %s", request.COOKIES.get("_gaexp"))
+        logger.warning("Failed to parse _gaexp %s", request.COOKIES.get("_gaexp"))
         return None
 
-    if not experiment_variants:
+    if not cookie_data:
         logger.debug("Missing _ga_exp cookie")
         return None
 
@@ -22,15 +26,9 @@ def get_experiments_variants(request, experiments):
 
     for experiment in experiments:
 
-        experiment_id = experiment.get("id", None)
-        experiment_alias = experiment.get("alias", None)
-        variant_aliases = experiment.get("variant_aliases", None)
+        experiment_id = experiment.experiment_id
 
-        if not experiment_id:
-            logger.warning("experiment id not found in experiment settings")
-            return None
-
-        if experiment_id not in experiment_variants:
+        if experiment_id not in cookie_data:
             logger.warning(
                 "experiment id %s not found in experiments cookie %s",
                 experiment_id,
@@ -38,16 +36,29 @@ def get_experiments_variants(request, experiments):
             )
             return None
 
-        variant = experiment_variants[experiment_id]
+        variant_name = cookie_data[experiment_id]
 
-        if variant_aliases:
-            if variant in variant_aliases:
-                variant = variant_aliases[variant]
+        experiment_variants = experiment.experiment_variant.all()
 
-        if experiment_alias:
-            active_experiments[experiment_alias] = variant
+        if experiment_variants:
+            variant = experiment_variants.filter(index=variant_name).first()
+            if variant:
+                if variant.alias:
+                    variant_name = variant.alias
+            else:
+                logger.warning(
+                    "No experiment variant added with the index %s", variant_name
+                )
+                return None
         else:
-            active_experiments[experiment_id] = variant
+            logger.warning("No variants added")
+            return None
+
+        experiment_alias = experiment.experiment_alias
+        if experiment_alias:
+            active_experiments[experiment_alias] = variant_name
+        else:
+            active_experiments[experiment_id] = variant_name
 
     return active_experiments
 
