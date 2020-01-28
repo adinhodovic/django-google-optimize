@@ -4,14 +4,14 @@ from django.db import models
 class GoogleExperiment(models.Model):
     experiment_id = models.CharField(max_length=50, unique=True)
     experiment_alias = models.CharField(
-        max_length=30, unique=True, blank=True, null=True
+        max_length=30, unique=True, blank=True, null=True, required=False
     )
     active = models.BooleanField()
 
 
 class ExperimentVariant(models.Model):
     index = models.IntegerField()
-    alias = models.CharField(max_length=50, blank=False, null=True)
+    alias = models.CharField(max_length=50, blank=False, null=True, required=False)
     experiment = models.ForeignKey(
         GoogleExperiment,
         null=True,
