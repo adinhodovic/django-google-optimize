@@ -1,4 +1,3 @@
-from .models import GoogleExperiment
 from .utils import get_experiments_variants
 
 
