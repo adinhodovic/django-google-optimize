@@ -11,19 +11,23 @@ class GoogleExperiment(models.Model):
 
 class ExperimentVariant(models.Model):
     index = models.IntegerField()
-    alias = models.CharField(max_length=50)
-    experiment_variant = models.ForeignKey(
-        GoogleExperiment, null=True, blank=True, on_delete=models.CASCADE
+    alias = models.CharField(max_length=50, blank=False, null=True)
+    experiment = models.ForeignKey(
+        GoogleExperiment,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name="experiment_variant",
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["alias", "experiment_variant"],
+                fields=["alias", "experiment"],
                 name="Can not have the same alias within an experiment_variant",
             ),
             models.UniqueConstraint(
-                fields=["index", "experiment_variant"],
+                fields=["index", "experiment"],
                 name="Can not have the same index within an experiment_variant",
             ),
         ]
