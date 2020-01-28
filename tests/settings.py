@@ -4,6 +4,8 @@ DEBUG = True
 
 SECRET_KEY = "very-secret"
 
+DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "db.sqlite3"}}
+
 INSTALLED_APPS = [
     "django_google_optimize",
 ]
