@@ -185,3 +185,16 @@ def test_cookie_add_new(settings):
 
     values = get_experiments_variants(request)
     assert values == {exp.experiment_alias: variant.alias}
+
+
+@pytest.mark.django_db
+def test_cookie_only_debug():
+    exp = GoogleExperimentFactory()
+    variant = ExperimentVariantFactory(index=1, experiment=exp)
+    ExperimentCookieFactory(active_variant_index=5, experiment=exp)
+
+    request = HttpRequest()
+    request.COOKIES["_gaexp"] = f"GAX1.2.{exp.experiment_id}.18147.1"
+
+    values = get_experiments_variants(request)
+    assert values == {exp.experiment_alias: variant.alias}
