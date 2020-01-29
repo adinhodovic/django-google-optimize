@@ -26,6 +26,7 @@ class ExperimentVariantFactory(factory.django.DjangoModelFactory):
     index = factory.Faker("pyint")
     experiment = factory.SubFactory(GoogleExperimentFactory)
 
+
 class ExperimentCookieFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = ExperimentCookie
