@@ -1,6 +1,8 @@
 import logging
 
-from .models import GoogleExperiment
+from django.conf import settings
+
+from .models import ExperimentCookie, GoogleExperiment
 
 logger = logging.getLogger()
 
@@ -63,7 +65,7 @@ def get_experiments_variants(request):
     return active_experiments
 
 
-def _parse_experiments(request):
+def _parse_experiments(request,):
     ga_exp = request.COOKIES.get("_gaexp")
     if not ga_exp:
         return None
@@ -78,4 +80,10 @@ def _parse_experiments(request):
         experiment_id = experiment_parts[0]
         variation_id = int(experiment_parts[2])
         experiment_variations[experiment_id] = variation_id
+    if settings.DEBUG:
+        cookies = ExperimentCookie.objects.filter(active=True)
+        for cookie in cookies:
+            experiment_variations[
+                cookie.experiment.experiment_id
+            ] = cookie.active_variant_index
     return experiment_variations

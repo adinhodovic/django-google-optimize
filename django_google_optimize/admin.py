@@ -1,6 +1,10 @@
 from django.contrib import admin
 
-from .models import ExperimentVariant, GoogleExperiment
+from .models import ExperimentCookie, ExperimentVariant, GoogleExperiment
+
+
+class ExperimentCookieInline(admin.StackedInline):
+    model = ExperimentCookie
 
 
 class ExperimentVariantInline(admin.StackedInline):
@@ -13,6 +17,4 @@ class GoogleExperimentAdmin(admin.ModelAdmin):
         "experiment_id",
         "experiment_alias",
     )
-    inlines = [
-        ExperimentVariantInline,
-    ]
+    inlines = [ExperimentVariantInline, ExperimentCookieInline]

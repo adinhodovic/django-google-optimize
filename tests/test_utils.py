@@ -3,7 +3,11 @@ from unittest import mock
 import pytest
 from django.http import HttpRequest
 
-from .test_helpers import ExperimentVariantFactory, GoogleExperimentFactory
+from .test_helpers import (
+    ExperimentCookieFactory,
+    ExperimentVariantFactory,
+    GoogleExperimentFactory,
+)
 
 from django_google_optimize.utils import _parse_experiments, get_experiments_variants
 
@@ -151,5 +155,33 @@ def test_filters_active_experiments():
     variant = ExperimentVariantFactory(index=1, experiment=exp)
     request = HttpRequest()
     request.COOKIES["_gaexp"] = f"GAX1.2.{exp.experiment_id}.18147.{variant.index}"
+    values = get_experiments_variants(request)
+    assert values == {exp.experiment_alias: variant.alias}
+
+
+@pytest.mark.django_db
+def test_cookie_override(settings):
+    settings.DEBUG = True
+    exp = GoogleExperimentFactory()
+    variant = ExperimentVariantFactory(index=1, experiment=exp)
+    ExperimentCookieFactory(active_variant_index=variant.index, experiment=exp)
+
+    request = HttpRequest()
+    request.COOKIES["_gaexp"] = f"GAX1.2.{exp.experiment_id}.18147.5"
+
+    values = get_experiments_variants(request)
+    assert values == {exp.experiment_alias: variant.alias}
+
+
+@pytest.mark.django_db
+def test_cookie_add_new(settings):
+    settings.DEBUG = True
+    exp = GoogleExperimentFactory()
+    variant = ExperimentVariantFactory(index=1, experiment=exp)
+    ExperimentCookieFactory(active_variant_index=variant.index, experiment=exp)
+
+    request = HttpRequest()
+    request.COOKIES["_gaexp"] = f"GAX1.2.543.18147.5"
+
     values = get_experiments_variants(request)
     assert values == {exp.experiment_alias: variant.alias}
