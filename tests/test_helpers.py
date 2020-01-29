@@ -10,7 +10,7 @@ class GoogleExperimentFactory(factory.django.DjangoModelFactory):
 
     experiment_id = factory.Faker("sha1")
     experiment_alias = factory.Faker("city")
-    active = False
+    active = True
 
 
 # pylint: disable=too-few-public-methods
