@@ -46,7 +46,7 @@ Instead of by variant alias:
     {% endif %}
 ```
 
-If you do not use the Experiment Cookie make sure to add the `_gaexp` cookie when testing locally:
+If you do not use the Experiment Cookie object when testing locally make sure to add the `_gaexp` cookie to the session:
 
 ```txt
 Cookie Name: _gaexp
