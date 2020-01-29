@@ -181,14 +181,12 @@ def test_cookie_add_new(settings):
     ExperimentCookieFactory(active_variant_index=variant.index, experiment=exp)
 
     request = HttpRequest()
-    request.COOKIES["_gaexp"] = f"GAX1.2.543.18147.5"
-
     values = get_experiments_variants(request)
     assert values == {exp.experiment_alias: variant.alias}
 
 
 @pytest.mark.django_db
-def test_cookie_only_debug():
+def test_cookie_override_only_debug():
     exp = GoogleExperimentFactory()
     variant = ExperimentVariantFactory(index=1, experiment=exp)
     ExperimentCookieFactory(active_variant_index=5, experiment=exp)

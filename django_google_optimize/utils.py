@@ -67,23 +67,23 @@ def get_experiments_variants(request):
 
 def _parse_experiments(request,):
     ga_exp = request.COOKIES.get("_gaexp")
-    if not ga_exp:
-        return None
 
     experiment_variations = {}
-
-    parts = ga_exp.split(".")
-    experiments_part = ".".join(parts[2:])
-    experiments = experiments_part.split("!")
-    for experiment_str in experiments:
-        experiment_parts = experiment_str.split(".")
-        experiment_id = experiment_parts[0]
-        variation_id = int(experiment_parts[2])
-        experiment_variations[experiment_id] = variation_id
+    if ga_exp:
+        parts = ga_exp.split(".")
+        experiments_part = ".".join(parts[2:])
+        experiments = experiments_part.split("!")
+        for experiment_str in experiments:
+            experiment_parts = experiment_str.split(".")
+            experiment_id = experiment_parts[0]
+            variation_id = int(experiment_parts[2])
+            experiment_variations[experiment_id] = variation_id
     if settings.DEBUG:
         cookies = ExperimentCookie.objects.filter(active=True)
         for cookie in cookies:
             experiment_variations[
                 cookie.experiment.experiment_id
             ] = cookie.active_variant_index
-    return experiment_variations
+    if experiment_variations:
+        return experiment_variations
+    return None
