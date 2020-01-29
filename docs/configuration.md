@@ -22,7 +22,7 @@ Without an Google Experiment alias you will have to reference your experiment by
     {% endif %}
 ```
 
-Instead of by alias:
+Instead of by experiment alias:
 
 ```python
     {% if request.google_optimize.redesign_header == 0 %}
@@ -30,7 +30,7 @@ Instead of by alias:
     {% endif %}
 ```
 
-Without an experiment alias you will have to reference your variant by index as:
+Without an variant alias you will have to reference your variant by index as:
 
 ```python
     {% if request.google_optimize.redesign_header == 0 %}
@@ -38,7 +38,7 @@ Without an experiment alias you will have to reference your variant by index as:
     {% endif %}
 ```
 
-Instead of alias:
+Instead of by variant alias:
 
 ```python
     {% if request.google_optimize.redesign_header == "New Background Color" %}
