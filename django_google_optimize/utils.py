@@ -7,7 +7,7 @@ logger = logging.getLogger()
 
 # pylint: disable=too-many-return-statements
 def get_experiments_variants(request):
-    experiments = GoogleExperiment.objects.all()
+    experiments = GoogleExperiment.objects.filter(active=True)
     if not experiments:
         logger.warning("No experiment added")
         return None
