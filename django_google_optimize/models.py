@@ -31,3 +31,18 @@ class ExperimentVariant(models.Model):
                 name="Can not have the same index within an experiment_variant",
             ),
         ]
+
+
+class ExperimentCookie(models.Model):
+    active_variant_index = models.IntegerField(
+        # pylint: disable=line-too-long
+        help_text="Overrides or adds the cookie and sets the active variant for this experiment\nNOTE: ONLY WORKS IN DEBUG MODE"
+    )
+    active = models.BooleanField()
+    experiment = models.OneToOneField(
+        GoogleExperiment,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name="experiment_cookie",
+    )

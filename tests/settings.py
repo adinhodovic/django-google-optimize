@@ -1,7 +1,5 @@
 from os import path
 
-DEBUG = True
-
 SECRET_KEY = "very-secret"
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "db.sqlite3"}}

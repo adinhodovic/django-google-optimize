@@ -1,6 +1,10 @@
 import factory
 
-from django_google_optimize.models import ExperimentVariant, GoogleExperiment
+from django_google_optimize.models import (
+    ExperimentCookie,
+    ExperimentVariant,
+    GoogleExperiment,
+)
 
 
 # pylint: disable=too-few-public-methods
@@ -20,4 +24,13 @@ class ExperimentVariantFactory(factory.django.DjangoModelFactory):
 
     alias = factory.Faker("city")
     index = factory.Faker("pyint")
+    experiment = factory.SubFactory(GoogleExperimentFactory)
+
+
+class ExperimentCookieFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ExperimentCookie
+
+    active_variant_index = factory.Faker("pyint")
+    active = True
     experiment = factory.SubFactory(GoogleExperimentFactory)
