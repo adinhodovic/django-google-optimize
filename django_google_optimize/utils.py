@@ -40,22 +40,12 @@ def get_experiments_variants(request):
 
         variant_name = cookie_data[experiment_id]
 
-        experiment_variants = experiment.experiment_variant.all()
+        variant = experiment.experiment_variant.all().filter(index=variant_name).first()
+        if variant:
+            variant_name = variant.alias
 
-        if experiment_variants:
-            variant = experiment_variants.filter(index=variant_name).first()
-            if variant:
-                if variant.alias:
-                    variant_name = variant.alias
-            else:
-                logger.warning(
-                    "No experiment variant added with the index %s", variant_name
-                )
-                return None
-
-        experiment_alias = experiment.experiment_alias
-        if experiment_alias:
-            active_experiments[experiment_alias] = variant_name
+        if experiment.experiment_alias:
+            active_experiments[experiment.experiment_alias] = variant_name
         else:
             active_experiments[experiment_id] = variant_name
 

@@ -11,7 +11,7 @@ class GoogleExperiment(models.Model):
 
 class ExperimentVariant(models.Model):
     index = models.IntegerField()
-    alias = models.CharField(max_length=50, blank=True, null=True)
+    alias = models.CharField(max_length=50, default="")
     experiment = models.ForeignKey(
         GoogleExperiment,
         null=True,
