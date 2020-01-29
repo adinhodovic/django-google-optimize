@@ -36,7 +36,7 @@ class ExperimentVariant(models.Model):
 class ExperimentCookie(models.Model):
     active_variant_index = models.IntegerField(
         # pylint: disable=line-too-long
-        help_text="Overrides the cookie and sets the active variant for this experiment\nNOTE: ONLY WORKS IN DEBUG MODE"
+        help_text="Overrides or adds the cookie and sets the active variant for this experiment\nNOTE: ONLY WORKS IN DEBUG MODE"
     )
     active = models.BooleanField()
     experiment = models.OneToOneField(
