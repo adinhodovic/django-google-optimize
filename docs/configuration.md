@@ -1,48 +1,13 @@
 # Configuration
 
-The configuration is a list of dicts and each dict consists of three fields, one being mandatory and the other two being optional:
+You can configure the Google Optimize experiments via the Django admin panel. There are three objects that you can add:
 
-- id(string, required): Experiment id required to identify each experiment in the cookie set by Google.
-- alias(string, optional): Alias for the experiment id, useful for clarity when accessing experiment variants by key.
-- variant_aliases(dict, optional): Aliases for each variant, consist of key-value variables. The key represents the index for each experiment variant. The value is the alias for the variant. Check your Google Optimize experiment to see which index represents what experiment variant.
+- Google Experiment.
+- Experiment Variant
+- Experiment Cookie
 
-## Single experiment
+The Google Experiment object contains of an experiment id and an optional alias which can used to alternatively reference the experiment in code.
 
-For a single experiment the settings could be the following:
+The Experiment Variant is optional and it is used to give each experiment variant an alias for easier usage in templates/views. If not added the returned variant will be the index of the variant in the Google Optimize experiment.
 
-```py
-# django-google-optimize
-GOOGLE_OPTIMIZE_EXPERIMENTS = [
-    {
-        "id": "utSuKi3PRbmxeG08en8VNw",
-        "alias": "redesign",
-        "variant_aliases": {0: "old_design", 1: "new_design"},
-    }
-]
-```
-
-## Multiple experiments
-
-For multiple experiments the settings could be the following:
-
-```py
-# django-google-optimize
-GOOGLE_OPTIMIZE_EXPERIMENTS = [
-    {
-        "id": "3x8_BbSCREyqtWm1H1OUrQ",
-        "alias": "redesign_page",
-        "variant_aliases": {0: "old_design", 1: "new_design"},
-    },
-    {
-        "id": "7IXTpXmLRzKwfU-Eilh_0Q",
-        "alias": "redesign_header",
-        "variant_aliases": {0: "old_header", 1: "new_header"},
-    },
-]
-```
-
-## Notes
-
-If you do not set the alias you'll have to access the experiment variant by the Google Optimize id for the experiment.
-
-If you do not set the variant alias for a variant the index will be the variant returned.
+The Experiment Cookie is optional and it is only used in DEBUG mode. It aids in overriding or adding an experiment to the browser cookie. Replaces any interaction with the browser session when developing, you can test out all your variants via the Django admin.
