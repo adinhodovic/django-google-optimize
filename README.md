@@ -36,24 +36,9 @@ MIDDLEWARE = [
 
 ## Getting started
 
-Add settings for the experiments:
+Head over to the Django admin and add a new Google Optimize experiment. Add an experiment variant with the index 1 and the alias "new_design". Set the experiment cookie's active variant index to 1. Now the active variant for that experiment is 1 which is the experiment variant with the alias "new_design" that you created. Note: The experiment cookie only works in DEBUG mode and is used to avoid interacting with the session and testing the experiment variants via the Django admin.
 
-- id: Experiment ID required to identify variants for the experiment in templates
-- alias: Alias for the experiment ID, optional useful for clarity in templates when accessing experiment variants by key
-- variant_aliases: Aliases for each variant, each index represents a Optmize Experiment variant
-
-```py
-# django-google-optimize
-GOOGLE_OPTIMIZE_EXPERIMENTS = [
-    {
-        "id": "utSuKi3PRbmxeG08en8VNw",
-        "alias": "redesign",
-        "variant_aliases": {0: "old_design", 1: "new_design"},
-    }
-]
-```
-
-Now you can access the experiment in templates:
+Now you can access the experiment in templates by the experiment alias and the variant alias:
 
 ```django
 {% if request.google_optimize.redesign == "new_design" %}
