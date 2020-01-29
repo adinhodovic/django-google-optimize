@@ -52,9 +52,6 @@ def get_experiments_variants(request):
                     "No experiment variant added with the index %s", variant_name
                 )
                 return None
-        else:
-            logger.warning("No variants added")
-            return None
 
         experiment_alias = experiment.experiment_alias
         if experiment_alias:

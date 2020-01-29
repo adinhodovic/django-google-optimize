@@ -65,16 +65,6 @@ def test_logs_failed_cookie_parsing(logger):
 
 @pytest.mark.django_db
 @mock.patch("logging.Logger.warning")
-def test_logs_no_variants(logger):
-    exp = GoogleExperimentFactory()
-    request = HttpRequest()
-    request.COOKIES["_gaexp"] = f"GAX1.2.{exp.experiment_id}.18147.1"
-    get_experiments_variants(request)
-    logger.assert_called_with("No variants added")
-
-
-@pytest.mark.django_db
-@mock.patch("logging.Logger.warning")
 def test_logs_no_experiment_variant(logger):
     exp = GoogleExperimentFactory()
     ExperimentVariantFactory(index=0, alias="new_design", experiment=exp)
@@ -126,6 +116,15 @@ def test_parses_multiple_experiments():
         exp_1.experiment_alias: variant_1.alias,
         exp_2.experiment_alias: variant_2.alias,
     }
+
+
+@pytest.mark.django_db
+def test_parses_experiments_variants():
+    exp = GoogleExperimentFactory()
+    request = HttpRequest()
+    request.COOKIES["_gaexp"] = f"GAX1.2.{exp.experiment_id}.18147.1"
+    values = get_experiments_variants(request)
+    assert values == {exp.experiment_alias: 1}
 
 
 @pytest.mark.django_db
