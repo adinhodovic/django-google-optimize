@@ -2,7 +2,7 @@
 
 ## Usage in templates
 
-If you are redesigning major changes then you maybe would like to have two different templates. You can create a file that is called `jobs/xyz.html` that target two different files based on the experiment variant.
+If you are redesigning major changes then you maybe would like to have two different templates. You can create a file that is called `jobs/xyz.html` that include two different files based on the experiment variant.
 
 `jobs/xyz.html`
 
