@@ -4,7 +4,7 @@ Install django-google-optimize with pip:
 
 `pip install django-google-optimize`
 
-Add the application to installed django applications:
+Add the application to installed Django applications:
 
 ```py
 DJANGO_APPS = [
@@ -24,7 +24,7 @@ MIDDLEWARE = [
 ]
 ```
 
-If you want to access the request in your templates remember to add the request context processor:
+If you want to access the request object in your templates remember to add the request context processor if you have not already done it:
 
 ```python
 TEMPLATES = [

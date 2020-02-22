@@ -1,6 +1,6 @@
 # Welcome to django-google-optimize's documentation!
 
-django-google-optimize is a reusable Django application designed to make running server side Google Optimize A/B test easy.
+django-google-optimize is a Django application designed to make running Google Optimize A/B tests easy.
 
 ## Contents
 
