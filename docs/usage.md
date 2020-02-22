@@ -2,7 +2,7 @@
 
 ## Usage in templates
 
-If you are redesigning major changes then you maybe would like to have two different templates. You can create a file that is called `jobs/xyz.html` that include two different files based on the experiment variant.
+Including various Django templates based on the experiment variant:
 
 `jobs/xyz.html`
 
@@ -14,11 +14,11 @@ If you are redesigning major changes then you maybe would like to have two diffe
 {% endif %}
 ```
 
-Or you can use `django-google-optimize` inline within a single template:
+Or you can use `django-google-optimize` inline:
 
 ```django
 <nav class="navbar navbar-expand-lg navbar-dark
-{% if request.google_optimize.redesign == "new_design" %} navbar-redesign{% endif %}
+{% if request.google_optimize.redesign == "new_design" %}navbar-redesign{% endif %}
 ">
 ```
 
@@ -34,7 +34,7 @@ def get_template_names(self):
     return ["jobs/xyz_old.html"]
 ```
 
-Adjust the queryset based of the experiment variant:
+Adjust the queryset based on the experiment variant:
 
 ```python
 def get_queryset(self):
