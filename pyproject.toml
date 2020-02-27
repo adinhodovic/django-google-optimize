@@ -2,7 +2,7 @@
 name = "django-google-optimize"
 authors = ["Adin Hodovic <hodovicadin@gmail.com>"]
 license = "MIT"
-version = "0.1.9"
+version = "0.2.0"
 readme = "README.md"
 homepage = "https://github.com/adinhodovic/django-google-optimize"
 repository = "https://github.com/adinhodovic/django-google-optimize"
