@@ -47,7 +47,6 @@ def test_logs_missing_gaexp_cookie(logger):
 @pytest.mark.django_db
 def test_no_experiment_added():
     request = HttpRequest()
-    request.COOKIES["_gaexp"] = "test"
     experiments = get_experiments_variants(request)
     assert experiments is None
 
