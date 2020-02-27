@@ -46,15 +46,6 @@ def test_logs_missing_gaexp_cookie(logger):
 
 @pytest.mark.django_db
 @mock.patch("logging.Logger.warning")
-def test_logs_no_settings(logger):
-    request = HttpRequest()
-    request.COOKIES["_gaexp"] = "test"
-    get_experiments_variants(request)
-    logger.assert_called_with("No experiment added")
-
-
-@pytest.mark.django_db
-@mock.patch("logging.Logger.warning")
 def test_logs_failed_cookie_parsing(logger):
     GoogleExperimentFactory()
     request = HttpRequest()

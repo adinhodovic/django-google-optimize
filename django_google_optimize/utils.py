@@ -11,7 +11,6 @@ logger = logging.getLogger()
 def get_experiments_variants(request):
     experiments = GoogleExperiment.objects.filter(active=True)
     if not experiments:
-        logger.warning("No experiment added")
         return None
 
     try:
