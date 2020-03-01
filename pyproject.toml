@@ -49,6 +49,9 @@ pytest-clarity = "^0.2.0-alpha.1"
 black = "^19.10b0"
 mypy = "^0.761"
 django-stubs = "^1.4.0"
+pudb = "^2019.2"
+ptpython = "^3.0.1"
+ptipython = "^1.0.1"
 
 [build-system]
 requires = ["poetry>=0.12"]
