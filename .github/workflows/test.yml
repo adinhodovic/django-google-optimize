@@ -4,6 +4,9 @@ on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - '**'
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test:
