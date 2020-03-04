@@ -15,8 +15,8 @@ Install django-google-optimize with pip:
 `pip install django-google-optimize`
 
 Add the application to installed Django applications:
-
-```py
+ab
+```pyab
 DJANGO_APPS = [
     ...
     "django_google_optimize",
