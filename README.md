@@ -23,7 +23,7 @@ DJANGO_APPS = [
     ...
 ]
 ```
-
+Test
 Add the middleware:
 
 ```py
