@@ -28,7 +28,7 @@ To display two different templates based on the experiment variant:
 
 ```python
 def get_template_names(self):
-    variant = request.google_optimize.get("redesign", None)
+    variant = self.request.google_optimize.get("redesign", None)
     if variant == "new":
         return ["jobs/xyz_new.html"]
     return ["jobs/xyz_old.html"]
