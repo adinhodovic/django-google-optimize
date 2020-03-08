@@ -33,7 +33,7 @@ def get_experiments_variants(request):
             logger.warning(
                 "experiment id %s not found in experiments cookie %s",
                 experiment_id,
-                request.COOKIES.get("_gaexp", None),
+                request.COOKIES.get("_gaexp"),
             )
             return None
 
