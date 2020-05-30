@@ -1,7 +1,8 @@
 from unittest import mock
 
-import pytest
 from django.http import HttpRequest
+
+import pytest
 
 from .test_helpers import (
     ExperimentCookieFactory,
@@ -66,7 +67,7 @@ def test_logs_failed_cookie_parsing(logger):
 def test_logs_experiment_id_not_in_cookies(logger):
     exp = GoogleExperimentFactory()
     request = HttpRequest()
-    gaexp = f"GAX1.2.3x8_BbSCREyqtWm1H1OUrQ.18166.1"
+    gaexp = "GAX1.2.3x8_BbSCREyqtWm1H1OUrQ.18166.1"
     request.COOKIES["_gaexp"] = gaexp
     get_experiments_variants(request)
     logger.assert_called_with(
