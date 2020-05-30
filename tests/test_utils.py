@@ -1,8 +1,7 @@
 from unittest import mock
 
-from django.http import HttpRequest
-
 import pytest
+from django.http import HttpRequest
 
 from .test_helpers import (
     ExperimentCookieFactory,
