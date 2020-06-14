@@ -8,7 +8,7 @@
 
 Django-google-optimize is a Django application designed to make running Google Optimize A/B tests easy.
 
-I've written a tutorial on how to use the application https://hodovi.cc/blog/django-b-testing-google-optimize/.
+[Here is a tutorial on the Google Optimize basics and how to use this Django application.](https://hodovi.cc/blog/django-b-testing-google-optimize/)
 
 ## Installation
 
