@@ -51,7 +51,9 @@ def get_experiments_variants(request):
     return active_experiments
 
 
-def _parse_experiments(request,):
+def _parse_experiments(
+    request,
+):
     ga_exp = request.COOKIES.get("_gaexp")
 
     experiment_variations = {}
@@ -68,7 +70,7 @@ def _parse_experiments(request,):
         cookies = ExperimentCookie.objects.filter(active=True)
         for cookie in cookies:
             experiment_variations[
-                cookie.experiment.experiment_id
+                cookie.experiment.experiment_id  # type: ignore
             ] = cookie.active_variant_index
     if experiment_variations:
         return experiment_variations
