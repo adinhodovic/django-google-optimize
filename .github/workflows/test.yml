@@ -14,8 +14,8 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
-        python-version: [3.7, 3.8]
-        dj-version: [django22, django30, djangomaster]
+        python-version: [3.8, 3.9]
+        dj-version: [django22, django30, django31, djangomaster]
 
     steps:
       - uses: actions/checkout@v1
