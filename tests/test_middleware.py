@@ -1,8 +1,8 @@
 import pytest
 
-from .test_helpers import ExperimentVariantFactory, GoogleExperimentFactory
-
 from django_google_optimize.middleware import override_google_optimize
+
+from .test_helpers import ExperimentVariantFactory, GoogleExperimentFactory
 
 pytestmark = pytest.mark.django_db
 

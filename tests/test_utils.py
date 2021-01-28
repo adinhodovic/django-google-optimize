@@ -3,13 +3,13 @@ from unittest import mock
 import pytest
 from django.http import HttpRequest
 
+from django_google_optimize.utils import _parse_experiments, get_experiments_variants
+
 from .test_helpers import (
     ExperimentCookieFactory,
     ExperimentVariantFactory,
     GoogleExperimentFactory,
 )
-
-from django_google_optimize.utils import _parse_experiments, get_experiments_variants
 
 
 def test_parses_single_experiment_cookie():

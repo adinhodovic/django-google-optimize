@@ -16,9 +16,13 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "APP_DIRS": True,
-        "DIRS": [path.join(path.dirname(__file__), "templates"),],
+        "DIRS": [
+            path.join(path.dirname(__file__), "templates"),
+        ],
         "OPTIONS": {
-            "context_processors": ["django.template.context_processors.request",]
+            "context_processors": [
+                "django.template.context_processors.request",
+            ]
         },
     }
 ]
