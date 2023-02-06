@@ -35,7 +35,7 @@ def get_experiments_variants(request):
                 experiment_id,
                 request.COOKIES.get("_gaexp"),
             )
-            return None
+            continue
 
         variant_name = cookie_data[experiment_id]
 
